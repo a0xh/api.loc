@@ -2,18 +2,46 @@
 
 namespace App\Domain\Genres\DTObjects;
 
-use App\Domain\Genres\ValueObjects\GenreVO;
 use Illuminate\Support\Arr;
 
-final readonly class GenreDto
+final class GenreDto
 {
-    public function __construct(public GenreVO $genre) {}
+    public function __construct(
+        private readonly string $title,
+        private readonly ?string $description,
+        private readonly ?string $content,
+        private readonly string $slug,
+        private readonly ?string $keywords,
+        private readonly string $status,
+    ) {}
 
-    public static function fromArray(array $data): self
+    public function getTitle(): string
     {
-        $genreDto = Arr::get($data, 'genre');
-        $genreValueObjects = GenreVO::fromArray($genreDto);
+        return $this->title;
+    }
 
-        return new self($genreValueObjects);
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    public function getKeywords(): ?string
+    {
+        return $this->keywords;
+    }
+
+    public function getStatus(): string
+    {
+        return $this->status;
     }
 }

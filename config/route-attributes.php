@@ -14,6 +14,8 @@ return [
      */
     'directories' => [
         app_path('Domain/Genres/Architecture/Web/Index') => ['middleware' => ['web']],
+        app_path('Domain/Genres/Architecture/Web/Create') => ['middleware' => ['web']],
+        app_path('Domain/Genres/Architecture/Web/Store') => ['middleware' => ['web']],
         /*
         app_path('Http/Controllers/Api') => [
            'prefix' => 'api',

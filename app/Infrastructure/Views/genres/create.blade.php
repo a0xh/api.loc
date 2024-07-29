@@ -3,59 +3,45 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Create Genre') }}</div>
 
                 <div class="card-body">
-                    <table class="table">
-                    	<thead>
-						    <tr>
-						    	<th scope="col">#ID</th>
-						    	<th scope="col">Title</th>
-						    	<th scope="col">User</th>
-						    	<th scope="col">Status</th>
-						    	<th scope="col">Actions</th>
-						    </tr>
-						</thead>
-						<tbody>
-							@foreach ($genres as $genre)
-								<tr>
-									<th scope="row">{{ $genre->id }}</th>
-									<td>{{ str()->limit($genre->title, 30) }}</td>
-									<td>
-										@if ($genre->status !== 'active')
-											<span class="badge bg-warning text-dark">Inactive</span>
-										@else
-											<span class="badge bg-dark">Active</span>
-										@endif
-									</td>
-									<td>{{ $genre->user->login }}</td>
-									<td>
-					                    <div class="btn-group" role="group" aria-label="btn-group">
-					                        <div>
-					                        	<a href="#" class="btn btn-outline-primary btn-sm">Show</a>
-					                        </div>
-
-					                        <div>
-					                        	<a href="#" class="btn btn-outline-success btn-sm">Edit</a>
-					                        </div>
-
-					                        <div>
-					                        	<form action="#" method="post">
-
-						                            @method('DELETE')
-						                            @csrf
-
-						                            <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
-						                        </form>
-						                    </div>
-					                    </div>
-									</td>
-								</tr>
-							@endforeach
-					  </tbody>
-					</table>
+                    <form action="{{ route('admin.genres.store') }}" method="POST">
+                    	@csrf
+                    	<div class="mb-3">
+						    <label for="title" class="form-label">Title</label>
+						    <input id="title" type="text" name="title" class="form-control" aria-describedby="title">
+						</div>
+						<div class="mb-3">
+						    <label for="slug" class="form-label">Slug</label>
+						    <input id="slug" type="text" name="slug" class="form-control" aria-describedby="slug">
+						</div>
+						<div class="mb-3">
+						    <label for="description" class="form-label">Description</label>
+						    <textarea id="description" name="description" rows="2" class="form-control"></textarea>
+						</div>
+						<div class="mb-3">
+						    <label for="keywords" class="form-label">Keywords</label>
+						    <input id="keywords" type="text" name="keywords" class="form-control" aria-describedby="keywords">
+						</div>
+						<div class="mb-3">
+						    <label for="content" class="form-label">Content</label>
+						    <textarea id="content" name="content" rows="6" class="form-control"></textarea>
+						</div>
+						<div class="mb-3">
+							<div class="form-check">
+								<input id="status" type="radio" name="status" value="active" class="form-check-input">
+								<label for="status" class="form-check-label">Active</label>
+							</div>
+							<div class="form-check">
+								<input id="status" type="radio" name="status" value="inactive" class="form-check-input" checked>
+								<label for="status" class="form-check-label">Inactive</label>
+							</div>
+						</div>
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</form>
                 </div>
             </div>
         </div>

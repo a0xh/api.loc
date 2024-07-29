@@ -44,8 +44,15 @@ class GenreRequest extends FormRequest
         return $request;
     }
 
-    public function getGenreDto(): GenreDto
+    public function sendGenreDto(): GenreDto
     {
-        return GenreDto::fromArray($this->validated());
+        return new GenreDto(
+            title: $this->string('name')->trim()->value,
+            description: $this->string('description')->trim()->value,
+            content: $this->input('content'),
+            slug: $this->string('slug')->trim()->value,
+            keywords: $this->string('keywords')->trim()->value,
+            status: $this->string('status')->trim()->value,
+        );
     }
 }

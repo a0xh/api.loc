@@ -12,7 +12,7 @@ final readonly class StoreGenreResponder
         
         if ($result) {
             session()->flash("success", "{$message}.success");
-            return redirect()->route('admin.genre.index');
+            return redirect()->route('admin.genres.index');
         }
 
         return back()->with("error", "{$message}.error");

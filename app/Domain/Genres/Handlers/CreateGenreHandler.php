@@ -13,17 +13,17 @@ final class CreateGenreHandler
         private GenreRepositoryInterface $genreRepository
     ) {}
 
-    public function handle(GenreDto $dto): bool
+    public function handle(GenreDto $genreDto): bool
     {
         $userId = ['user_id' => Auth::user()->id];
 
         $data = collect([
-            'title' => $dto->genre->title,
-            'description' => $dto->genre->description,
-            'slug' => $dto->genre->slug,
-            'keywords' => $dto->genre->keywords,
-            'status' => $dto->genre->status,
-            'content' => $dto->genre->content
+            'title' => $genreDto->getTitle(),
+            'description' => $genreDto->getDescription(),
+            'slug' => $genreDto->getSlug(),
+            'keywords' => $genreDto->getKeywords(),
+            'status' => $genreDto->getStatus(),
+            'content' => $genreDto->getContent()
         ]);
 
         $createGenre = $this->genreRepository->createGenre(
