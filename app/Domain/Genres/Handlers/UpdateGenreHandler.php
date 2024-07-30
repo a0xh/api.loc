@@ -3,19 +3,19 @@
 namespace App\Domain\Genres\Handlers;
 
 use App\Domain\Genres\Repository\GenreRepositoryInterface;
-use Illuminate\Support\Facades\Auth;
+use App\Application\Models\Genre;
 use App\Domain\Genres\DTObjects\GenreDto;
 use Illuminate\Support\Collection;
 
-final class CreateGenreHandler
+final class UpdateGenreHandler
 {
     public function __construct(
         private GenreRepositoryInterface $genreRepository
     ) {}
 
-    public function handle(GenreDto $genreDto): bool
+    public function handle(Genre $genre, GenreDto $genreDto): bool
     {
-        $userId = ['user_id' => Auth::user()->id];
+        $userId = ['user_id' => $genre->user->id];
 
         $data = collect([
             'title' => $genreDto->getTitle(),
@@ -26,10 +26,10 @@ final class CreateGenreHandler
             'content' => $genreDto->getContent()
         ]);
 
-        $createGenre = $this->genreRepository->createGenre(
-            $data->merge($userId)->toArray()
+        $updateGenre = $this->genreRepository->updateGenre(
+            $genre, $data->merge($userId)->toArray()
         );
 
-        return $createGenre;
+        return $updateGenre;
     }
 }

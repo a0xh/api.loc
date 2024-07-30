@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace App\Domain\Genres\Architecture\Web\Store;
+namespace App\Domain\Genres\Architecture\Web\Update;
 
 use Illuminate\Http\RedirectResponse;
 
-final readonly class StoreGenreResponder
+final readonly class UpdateGenreResponder
 {
     public function handle(bool $result): RedirectResponse
     {
-        $message = 'messages.admin.genre.store';
+        $message = 'messages.admin.genre.update';
         
         if ($result) {
             session()->flash("success", "{$message}.success");

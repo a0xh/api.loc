@@ -13,9 +13,14 @@ return [
      * Optionally, you can specify group configuration by using key/values
      */
     'directories' => [
-        app_path('Domain/Genres/Architecture/Web/Index') => ['middleware' => ['web']],
-        app_path('Domain/Genres/Architecture/Web/Create') => ['middleware' => ['web']],
-        app_path('Domain/Genres/Architecture/Web/Store') => ['middleware' => ['web']],
+        /* Genres Routes */
+        app_path('Domain/Genres/Architecture/Web/Create') => ['middleware' => ['web', 'auth']],
+        app_path('Domain/Genres/Architecture/Web/Delete') => ['middleware' => ['web', 'auth']],
+        app_path('Domain/Genres/Architecture/Web/Edit') => ['middleware' => ['web', 'auth']],
+        app_path('Domain/Genres/Architecture/Web/Index') => ['middleware' => ['web', 'auth']],
+        app_path('Domain/Genres/Architecture/Web/Show') => ['middleware' => ['web', 'auth']],
+        app_path('Domain/Genres/Architecture/Web/Store') => ['middleware' => ['web', 'auth']],
+        app_path('Domain/Genres/Architecture/Web/Update') => ['middleware' => ['web', 'auth']],
         /*
         app_path('Http/Controllers/Api') => [
            'prefix' => 'api',

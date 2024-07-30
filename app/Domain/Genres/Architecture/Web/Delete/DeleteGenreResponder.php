@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace App\Domain\Genres\Architecture\Web\Store;
+namespace App\Domain\Genres\Architecture\Web\Delete;
 
 use Illuminate\Http\RedirectResponse;
 
-final readonly class StoreGenreResponder
+final readonly class DeleteGenreResponder
 {
     public function handle(bool $result): RedirectResponse
     {
-        $message = 'messages.admin.genre.store';
+        $message = 'messages.admin.genre.delete';
         
         if ($result) {
             session()->flash("success", "{$message}.success");

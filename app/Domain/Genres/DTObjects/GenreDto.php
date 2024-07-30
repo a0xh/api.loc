@@ -2,8 +2,6 @@
 
 namespace App\Domain\Genres\DTObjects;
 
-use Illuminate\Support\Arr;
-
 final class GenreDto
 {
     public function __construct(

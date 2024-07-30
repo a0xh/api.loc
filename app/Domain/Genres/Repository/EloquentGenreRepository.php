@@ -2,9 +2,6 @@
 
 namespace App\Domain\Genres\Repository;
 
-use App\Domain\Genres\Handlers\CreateGenreHandler;
-use App\Domain\Genres\DTObjects\GenreDto;
-use App\Domain\Genres\Decorator\DecoratorGenreRepository;
 use App\Application\Models\Genre;
 
 final class EloquentGenreRepository extends DecoratorGenreRepository
@@ -27,9 +24,9 @@ final class EloquentGenreRepository extends DecoratorGenreRepository
 
     public function updateGenre(Genre $genre, array $data): bool
     {
-        $updateGenre = $genre->update($genre, $data);
+        $updateGenre = $genre->update($data);
 
-        return $updateGenre->save();
+        return $updateGenre;
     }
 
     public function deleteGenre(Genre $genre): bool

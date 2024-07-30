@@ -47,7 +47,7 @@ class GenreRequest extends FormRequest
     public function sendGenreDto(): GenreDto
     {
         return new GenreDto(
-            title: $this->string('name')->trim()->value,
+            title: $this->string('title')->trim()->value,
             description: $this->string('description')->trim()->value,
             content: $this->input('content'),
             slug: $this->string('slug')->trim()->value,

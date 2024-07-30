@@ -34,15 +34,15 @@
 									<td>
 					                    <div class="btn-group" role="group" aria-label="btn-group">
 					                        <div>
-					                        	<a href="#" class="btn btn-outline-primary btn-sm">Show</a>
+					                        	<a href="{{ route('admin.genres.show', $genre) }}" class="btn btn-outline-primary btn-sm">Show</a>
 					                        </div>
 
 					                        <div>
-					                        	<a href="#" class="btn btn-outline-success btn-sm">Edit</a>
+					                        	<a href="{{ route('admin.genres.edit', $genre) }}" class="btn btn-outline-success btn-sm">Edit</a>
 					                        </div>
 
 					                        <div>
-					                        	<form action="#" method="post">
+					                        	<form action="{{ route('admin.genres.delete', $genre) }}" method="post">
 
 						                            @method('DELETE')
 						                            @csrf
