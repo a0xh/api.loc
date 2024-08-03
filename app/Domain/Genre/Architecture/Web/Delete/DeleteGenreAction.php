@@ -8,18 +8,19 @@ use Illuminate\Http\RedirectResponse;
 use Spatie\RouteAttributes\Attributes\{Delete, WhereUuid};
 use App\Application\Models\Genre;
 
-#[WhereUuid('id')]
+#[WhereUuid(param: 'id')]
 final class DeleteGenreAction extends Controller
 {
     public function __construct(
         private readonly DeleteGenreResponder $responder
     ) {}
 
-    #[Delete('/admin/genres/{id}/delete', name: "admin.genres.delete")]
+    #[Delete(uri: '/genres/{id}/delete', name: "genres.delete")]
     public function __invoke(
         string $id, DeleteGenreHandler $handler
-    ): RedirectResponse
-    {
-        return $this->responder->handle(result: $handler->handle(id: $id));
+    ): RedirectResponse {
+        return $this->responder->handle(
+            result: $handler->handle(id: $id)
+        );
     }
 }

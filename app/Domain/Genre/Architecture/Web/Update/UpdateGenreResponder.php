@@ -6,20 +6,20 @@ use Illuminate\Http\RedirectResponse;
 
 final readonly class UpdateGenreResponder
 {
-    public function handle(bool $result): RedirectResponse
+    public function respond(bool $result): RedirectResponse
     {
-        $message = str()->of('messages.admin.genre.update');
+        $message = str()->of(string: 'messages.admin.genre.update');
         
         if ($result) {
             session()->flash(
-                key: "success", value: $message->finish('.success')
+                key: 'success', value: $message->finish(value: '.success')
             );
 
-            return redirect()->route(name: 'admin.genres.index');
+            return redirect()->route(name: 'genres.index');
         }
 
         return back()->with(
-            key: "warning", value: $message->finish('.warning')
+            key: 'warning', value: $message->finish(value: '.warning')
         );
     }
 }

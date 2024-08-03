@@ -1,21 +1,28 @@
 <?php declare(strict_types=1);
 
-namespace App\Domain\Genres\Architecture\Web\Show;
+namespace App\Domain\Genre\Architecture\Web\Show;
 
 use App\Infrastructure\Controllers\Controller;
+use App\Infrastructure\Repositories\RepositoryInterface;
 use Spatie\RouteAttributes\Attributes\{Get, WhereUuid};
-use App\Application\Models\Genre;
 
-#[WhereUuid('genre:id')]
+#[WhereUuid(param: 'id')]
 final class ShowGenreAction extends Controller
 {
     public function __construct(
-        private readonly ShowGenreResponder $genreResponder
+        private readonly RepositoryInterface $repository,
+        private readonly ShowGenreResponder $responder
     ) {}
 
-    #[Get('/admin/genres/{genre:id}/show', name: 'admin.genres.show')]
-    public function __invoke(Genre $genre): \Illuminate\View\View
+    #[Get(uri: '/genres/{id}/show', name: 'genres.show')]
+    public function __invoke(string $id): \Illuminate\View\View
     {
-        return $this->genreResponder->handle(['genre' => $genre]);
+        return $this->responder->respond(
+            data: [
+                'genre' => $this->repository->findGenre(
+                    id: $id
+                )
+            ]
+        );
     }
 }

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Domain\Genres\DTObjects;
+namespace App\Domain\Genre\DTObjects;
 
-final class GenderValueObject
+final class GenreValueObject
 {
     public function __construct(
         private readonly string $title,

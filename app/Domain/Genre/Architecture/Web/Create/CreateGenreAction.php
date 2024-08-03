@@ -11,7 +11,7 @@ final class CreateGenreAction extends Controller
         private readonly CreateGenreResponder $responder
     ) {}
 
-    #[Get('/admin/genres/create', name: 'admin.genres.create')]
+    #[Get('/genres/create', name: 'genres.create')]
     public function __invoke(): \Illuminate\View\View
     {
         return $this->responder->handle();

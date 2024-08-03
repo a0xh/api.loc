@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Create Genre') }}</div>
 
                 <div class="card-body">
-                    <form action="{{ route('admin.genres.store') }}" method="POST">
+                    <form action="{{ route('genres.store') }}" method="POST">
                     	@csrf
                     	<div class="mb-3">
 						    <label for="title" class="form-label">Title</label>

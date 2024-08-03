@@ -6,7 +6,7 @@ use Illuminate\Http\RedirectResponse;
 
 final readonly class StoreGenreResponder
 {
-    public function handle(bool $result): RedirectResponse
+    public function respond(bool $result): RedirectResponse
     {
         $message = str()->of('messages.admin.genre.store');
         
@@ -15,7 +15,7 @@ final readonly class StoreGenreResponder
                 key: "success", value: $message->finish('.success')
             );
 
-            return redirect()->route(name: 'admin.genres.index');
+            return redirect()->route('genres.index');
         }
 
         return back()->with(

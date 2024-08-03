@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App\Domain\Genres\Requests;
+namespace App\Domain\Genre\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Domain\Genres\DTObjects\GenderValueObject;
+use App\Domain\Genre\DTObjects\GenreValueObject;
 use Illuminate\Support\Collection;
 
 class GenreRequest extends FormRequest
@@ -44,9 +44,9 @@ class GenreRequest extends FormRequest
         return $request;
     }
 
-    public function toDto(): GenderValueObject
+    public function toDto(): GenreValueObject
     {
-        return new GenderValueObject(
+        return new GenreValueObject(
             title: $this->string(key: 'title')->trim()->value,
             description: $this->string(key: 'description')->trim()->value,
             content: $this->input(key: 'content'),

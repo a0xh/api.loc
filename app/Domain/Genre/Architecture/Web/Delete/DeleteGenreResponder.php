@@ -15,7 +15,7 @@ final readonly class DeleteGenreResponder
                 key: "success", value: $message->finish('.success')
             );
 
-            return redirect()->route(name: 'admin.genres.index');
+            return redirect()->route(name: 'genres.index');
         }
 
         return back()->with(

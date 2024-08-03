@@ -14,8 +14,8 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(
-            \App\Domain\Genres\Repository\GenreRepositoryInterface::class,
-            \App\Domain\Genres\Repository\CachedGenreRepository::class
+            \App\Infrastructure\Repositories\RepositoryInterface::class,
+            \App\Domain\Genre\Repositories\EloquentGenreRepository::class
         );
     }
 

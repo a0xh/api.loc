@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Update Genre') }}</div>
 
                 <div class="card-body">
-                    <form action="{{ route('admin.genres.update', $genre) }}" method="POST">
+                    <form action="{{ route('genres.update', $genre) }}" method="POST">
                     	@method('PUT')
                     	@csrf
                     	<div class="mb-3">

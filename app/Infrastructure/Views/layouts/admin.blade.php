@@ -35,17 +35,17 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.genres.index') }}">
+                            <a class="nav-link" href="{{ route('genres.index') }}">
                                 {{ __('Genres') }}
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.genres.index') }}">
+                            <a class="nav-link" href="{{ route('genres.index') }}">
                                 {{ __('Actors') }}
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.genres.index') }}">
+                            <a class="nav-link" href="{{ route('genres.index') }}">
                                 {{ __('Films') }}
                             </a>
                         </li>

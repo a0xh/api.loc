@@ -1,23 +1,25 @@
 <?php declare(strict_types=1);
 
-namespace App\Domain\Genres\Architecture\Web\Index;
+namespace App\Domain\Genre\Architecture\Web\Index;
 
 use App\Infrastructure\Controllers\Controller;
-use App\Domain\Genres\Repository\GenreRepositoryInterface;
+use App\Infrastructure\Repositories\RepositoryInterface;
 use Spatie\RouteAttributes\Attributes\Get;
 
 final class IndexGenreAction extends Controller
 {
     public function __construct(
-        private readonly GenreRepositoryInterface $genreRepository,
-        private readonly IndexGenreResponder $genreResponder
+        private readonly RepositoryInterface $repository,
+        private readonly IndexGenreResponder $responder
     ) {}
 
-    #[Get('/admin/genres', name: 'admin.genres.index')]
+    #[Get(uri: '/genres', name: 'genres.index')]
     public function __invoke(): \Illuminate\View\View
     {
-        return $this->genreResponder->handle(
-            data: ['genres' => $this->genreRepository->getAllGenre()]
+        return $this->responder->respond(
+            data: [
+                'genres' => $this->repository->allGenre()
+            ]
         );
     }
 }

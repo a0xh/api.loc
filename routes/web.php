@@ -2,7 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Infrastructure\Controllers\Auth\{LoginController, RegisterController, ForgotPasswordController, ResetPasswordController, ConfirmPasswordController, VerificationController};
+use App\Infrastructure\Controllers\Auth\{
+	LoginController,
+	RegisterController,
+	ForgotPasswordController,
+	ResetPasswordController,
+	ConfirmPasswordController,
+	VerificationController
+};
 
 /* Login Routes... */
 Route::get('login', 'LoginController@showLoginForm')->name('login');

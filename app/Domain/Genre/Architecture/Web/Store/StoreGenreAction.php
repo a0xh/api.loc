@@ -14,12 +14,12 @@ final class StoreGenreAction extends Controller
         private readonly StoreGenreResponder $responder
     ) {}
 
-    #[Post('/admin/genres/store', name: "admin.genres.store")]
+    #[Post('/genres/store', name: "genres.store")]
     public function __invoke(
         GenreRequest $request, CreateGenreHandler $handler
     ): RedirectResponse
     {
-        return $this->responder->handle(
+        return $this->responder->respond(
             result: $handler->handle(dto: $request->toDto())
         );
     }

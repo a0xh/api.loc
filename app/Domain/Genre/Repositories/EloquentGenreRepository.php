@@ -2,27 +2,40 @@
 
 namespace App\Domain\Genre\Repositories;
 
-final class EloquentGenreRepository extends DecoratorGenreRepository
+use App\Infrastructure\Repositories\BuilderRepository;
+use App\Application\Models\Genre;
+
+final class EloquentGenreRepository extends BuilderRepository
 {
-    public function __construct(private readonly Genre $genre) {}
+    public function __construct(
+        private readonly Genre $genre
+    ) {}
 
-    public function all(): array
+    public function allGenre(): array
     {
-        return $this->genre->query()->with(relations: 'user')->orderByDesc(column: 'created_at')->get()->all();
+        return $this->eloquent(
+            builder: $this->genre->query()
+        )->all(
+            with: ['user'],
+            data: null
+        );
     }
 
-    public function create(array $data): bool
+    public function findGenre(string $id): object
     {
-        return $this->genre->create(attributes: $data)->save();
+        return $this->eloquent(
+            builder: $this->genre->query()
+        )->find(
+            with: ['user'],
+            id: $id
+        );
     }
 
-    public function update(string $id, array $data): bool
+    public function createGenre(array $data): bool
     {
-        return $this->genre->where(key: 'id', operator: '==', value: $id)->update(values: $data);
-    }
-
-    public function delete(string $id): bool
-    {
-        return $this->genre->where(key: 'id', operator: '==', value: $id)->delete();
+        return $this->create(
+            data: $data,
+            override: null
+        );
     }
 }

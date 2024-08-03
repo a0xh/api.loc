@@ -15,7 +15,7 @@ final class EditGenreAction extends Controller
         private readonly EditGenreResponder $responder
     ) {}
 
-    #[Get('/admin/genres/{id}/edit', name: 'admin.genres.edit')]
+    #[Get('/genres/{id}/edit', name: 'genres.edit')]
     public function __invoke(string $id): \Illuminate\View\View
     {
         return $this->responder->handle([

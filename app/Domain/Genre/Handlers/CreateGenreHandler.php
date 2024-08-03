@@ -2,32 +2,31 @@
 
 namespace App\Domain\Genre\Handlers;
 
-use App\Domain\Genre\Repositories\RepositoryInterface;
-use Illuminate\Support\Facades\Auth;
-use App\Domain\Genre\DTObjects\GenderValueObject;
+use App\Infrastructure\Repositories\RepositoryInterface;
 use Illuminate\Support\Collection;
+use App\Domain\Genre\DTObjects\GenreValueObject;
+use Illuminate\Auth\AuthManager;
 
 final readonly class CreateGenreHandler
 {
     public function __construct(
-        private RepositoryInterface $repository
+        private RepositoryInterface $repository,
+        private AuthManager $auth
     ) {}
-
-    public function handle(GenderValueObject $gto): bool
+    
+    public function handle(GenreValueObject $dto): bool
     {
-        $userId = ['user_id' => Auth::user()->id];
-
-        $data = collect(value: [
-            'title' => $gto->getTitle(),
-            'description' => $gto->getDescription(),
-            'slug' => $gto->getSlug(),
-            'keywords' => $gto->getKeywords(),
-            'status' => $gto->getStatus(),
-            'content' => $gto->getContent()
-        ]);
-
-        return $this->repository->create(
-            data: $data->merge(items: $userId)->toArray()
+        return $this->repository->createGenre(
+            data: collect(value: [
+                'title' => $dto->getTitle(),
+                'description' => $dto->getDescription(),
+                'content' => $dto->getContent(),
+                'slug' => $dto->getSlug(),
+                'keywords' => $dto->getKeywords(),
+                'status' => $dto->getStatus()
+            ])->merge(items: [
+                'user_id' => $this->auth->id()
+            ])->toArray()
         );
     }
 }
