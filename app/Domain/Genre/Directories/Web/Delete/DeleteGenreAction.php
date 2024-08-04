@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Domain\Genre\Architecture\Web\Delete;
+namespace App\Domain\Genre\Directories\Web\Delete;
 
 use App\Infrastructure\Controllers\Controller;
 use App\Domain\Genre\Handlers\DeleteGenreHandler;
@@ -15,12 +15,12 @@ final class DeleteGenreAction extends Controller
         private readonly DeleteGenreResponder $responder
     ) {}
 
-    #[Delete(uri: '/genres/{id}/delete', name: "genres.delete")]
+    #[Delete(uri: '/genres/{id}/delete', name: 'genres.delete')]
     public function __invoke(
-        string $id, DeleteGenreHandler $handler
-    ): RedirectResponse {
-        return $this->responder->handle(
-            result: $handler->handle(id: $id)
-        );
+        string $id, DeleteGenreHandler $handler): RedirectResponse
+    {
+        $deleteGenre = $handler->handle(id: $id);
+
+        return $this->responder->respond(result: $deleteGenre);
     }
 }

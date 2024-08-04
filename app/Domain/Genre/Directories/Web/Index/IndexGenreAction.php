@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Domain\Genre\Architecture\Web\Index;
+namespace App\Domain\Genre\Directories\Web\Index;
 
 use App\Infrastructure\Controllers\Controller;
 use App\Infrastructure\Repositories\RepositoryInterface;

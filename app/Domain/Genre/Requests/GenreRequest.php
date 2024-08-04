@@ -3,7 +3,7 @@
 namespace App\Domain\Genre\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Domain\Genre\DTObjects\GenreValueObject;
+use App\Domain\Genre\DTObjects\GenreDto;
 use Illuminate\Support\Collection;
 
 class GenreRequest extends FormRequest
@@ -36,7 +36,7 @@ class GenreRequest extends FormRequest
                 'slug' => ['bail', 'nullable', 'string', 'lowercase', 'min:1', 'max:78', 'unique:genres,slug']
             ])->toArray(),
             'PUT' => $validation->merge(items: [
-                'slug' => ['bail', 'nullable', 'string', 'lowercase', 'min:1', 'max:78', 'unique:genres,slug,' . $this->genre->id]
+                'slug' => ['bail', 'nullable', 'string', 'lowercase', 'min:1', 'max:78', 'unique:genres,slug,' . $this->id]
             ])->toArray(),
             'DELETE' => ['id' => ['required', 'string', 'exists:users,id,' . $this->genre->id]],
         };
@@ -44,9 +44,9 @@ class GenreRequest extends FormRequest
         return $request;
     }
 
-    public function toDto(): GenreValueObject
+    public function toDto(): GenreDto
     {
-        return new GenreValueObject(
+        return new GenreDto(
             title: $this->string(key: 'title')->trim()->value,
             description: $this->string(key: 'description')->trim()->value,
             content: $this->input(key: 'content'),

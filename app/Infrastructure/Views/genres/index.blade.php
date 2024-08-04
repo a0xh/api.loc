@@ -21,28 +21,28 @@
 						<tbody>
 							@foreach ($genres as $genre)
 								<tr>
-									<th scope="row">{{ $genre->id }}</th>
-									<td>{{ str()->limit($genre->title, 30) }}</td>
+									<th scope="row">{{ $genre['id'] }}</th>
+									<td>{{ str()->limit($genre['title'], 30) }}</td>
 									<td>
-										@if ($genre->status !== 'active')
+										@if ($genre['status'] !== 'active')
 											<span class="badge bg-warning text-dark">Inactive</span>
 										@else
 											<span class="badge bg-dark">Active</span>
 										@endif
 									</td>
-									<td>{{ $genre->user->login }}</td>
+									<td>{{ $genre['user']['login'] }}</td>
 									<td>
 					                    <div class="btn-group" role="group" aria-label="btn-group">
 					                        <div>
-					                        	<a href="{{ route('genres.show', $genre) }}" class="btn btn-outline-primary btn-sm">Show</a>
+					                        	<a href="{{ route('genres.show', $genre['id']) }}" class="btn btn-outline-primary btn-sm">Show</a>
 					                        </div>
 
 					                        <div>
-					                        	<a href="{{ route('genres.edit', $genre) }}" class="btn btn-outline-success btn-sm">Edit</a>
+					                        	<a href="{{ route('genres.edit', $genre['id']) }}" class="btn btn-outline-success btn-sm">Edit</a>
 					                        </div>
 
 					                        <div>
-					                        	<form action="{{ route('genres.delete', $genre) }}" method="post">
+					                        	<form action="{{ route('genres.delete', $genre['id']) }}" method="post">
 
 						                            @method('DELETE')
 						                            @csrf

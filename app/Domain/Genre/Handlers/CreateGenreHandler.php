@@ -4,7 +4,7 @@ namespace App\Domain\Genre\Handlers;
 
 use App\Infrastructure\Repositories\RepositoryInterface;
 use Illuminate\Support\Collection;
-use App\Domain\Genre\DTObjects\GenreValueObject;
+use App\Domain\Genre\DTObjects\GenreDto;
 use Illuminate\Auth\AuthManager;
 
 final readonly class CreateGenreHandler
@@ -14,19 +14,14 @@ final readonly class CreateGenreHandler
         private AuthManager $auth
     ) {}
     
-    public function handle(GenreValueObject $dto): bool
+    public function handle(GenreDto $dto): bool
     {
         return $this->repository->createGenre(
-            data: collect(value: [
-                'title' => $dto->getTitle(),
-                'description' => $dto->getDescription(),
-                'content' => $dto->getContent(),
-                'slug' => $dto->getSlug(),
-                'keywords' => $dto->getKeywords(),
-                'status' => $dto->getStatus()
-            ])->merge(items: [
-                'user_id' => $this->auth->id()
-            ])->toArray()
+            data: $dto->toArray(
+                with: [
+                    'user_id' => $this->auth->id()
+                ]
+            )
         );
     }
 }

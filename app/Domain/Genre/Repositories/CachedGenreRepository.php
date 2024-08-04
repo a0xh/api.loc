@@ -2,54 +2,65 @@
 
 namespace App\Domain\Genre\Repositories;
 
+use App\Infrastructure\Repositories\BuilderRepository;
 use Illuminate\Cache\CacheManager;
 
-final class CachedGenreRepository extends DecoratorGenreRepository
+final class CachedGenreRepository extends BuilderRepository
 {
     private const TTL = 1440;
 
     public function __construct(
         private readonly EloquentGenreRepository $eloquent,
-        private readonly TransactionGenreRepository $transaction,
         private readonly CacheManager $cache
     ) {}
 
-    public function all(): array
+    public function allGenre(): array
     {
-        if (config(key: 'cache.status')) {
-            return $this->cache->remember(
-                key: 'genre_all', ttl: self::TTL, callback: function() {
-                return $this->eloquent->all();
-            });
-        }
-
-        return $this->eloquent->all();
+        return $this->cache->remember(
+            key: str()->of(string: 'genre_all'),
+            ttl: self::TTL,
+            callback: fn () => $this->eloquent->allGenre()
+        );
     }
 
-    public function create(array $data): bool
+    public function findGenre(string $id): object
     {
-        if (config(key: 'cache.status')) {
-            $this->cache->pull(key: 'genre_all');
-        }
-
-        return $this->transaction->create(data: $data);
+        return $this->eloquent->findGenre(
+            id: $id
+        );
     }
 
-    public function update(string $id, array $data): bool
+    public function createGenre(array $data): bool
     {
-        if (config(key: 'cache.status')) {
-            $this->cache->pull(key: 'genre_all');
-        }
+        $this->cache->pull(
+            key: str()->of(string: 'genre_all')
+        );
 
-        return $this->transaction->update($id, $data);
+        return $this->eloquent->createGenre(
+            data: $data
+        );
     }
 
-    public function delete(string $id): bool
+    public function updateGenre(string $id, array $data): bool
     {
-        if (config(key: 'cache.status')) {
-            $this->cache->forget(key: 'genre_all');
-        }
+        $this->cache->pull(
+            key: str()->of(string: 'genre_all')
+        );
 
-        return $this->transaction->delete(id: $id);
+        return $this->eloquent->updateGenre(
+            id: $id,
+            data: $data
+        );
+    }
+
+    public function deleteGenre(string $id): bool
+    {
+        $this->cache->forget(
+            key: str()->of(string: 'genre_all')
+        );
+
+        return $this->eloquent->deleteGenre(
+            id: $id
+        );
     }
 }

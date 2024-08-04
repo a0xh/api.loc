@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Domain\Genre\Architecture\Web\Index;
+namespace App\Domain\Genre\Directories\Web\Index;
 
 use Illuminate\Support\Facades\View;
 
@@ -9,8 +9,7 @@ final readonly class IndexGenreResponder
     public function respond(array $data): \Illuminate\View\View
     {
         return View::make(
-            view: 'admin::genres.index',
-            data: $data
+            view: 'admin::genres.index', data: $data
         );
     }
 }

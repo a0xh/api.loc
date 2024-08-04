@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Domain\Genre\Architecture\Web\Update;
+namespace App\Domain\Genre\Directories\Web\Update;
 
 use App\Infrastructure\Controllers\Controller;
 use Spatie\RouteAttributes\Attributes\{Put, WhereUuid};

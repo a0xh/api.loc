@@ -2,32 +2,24 @@
 
 namespace App\Domain\Genre\Handlers;
 
-use App\Domain\Genre\Repositories\GenreRepositoryInterface;
-use App\Domain\Genre\DTObjects\GenderValueObject;
+use App\Infrastructure\Repositories\RepositoryInterface;
+use App\Domain\Genre\DTObjects\GenreDto;
 use Illuminate\Support\Collection;
 
-final class UpdateGenreHandler
+final readonly class UpdateGenreHandler
 {
     public function __construct(
-        private readonly GenreRepositoryInterface $repository
+        private RepositoryInterface $repository
     ) {}
 
-    public function handle(string $id, GenderValueObject $dto): bool
+    public function handle(string $id, GenreDto $dto): bool
     {
-        $genre = $this->repository->find(id: $id);
-        $userId = ['user_id' => $genre->user->id];
+        $genre = $this->repository->findGenre(id: $id);
 
-        $data = collect(value: [
-            'title' => $dto->getTitle(),
-            'description' => $dto->getDescription(),
-            'slug' => $dto->getSlug(),
-            'keywords' => $dto->getKeywords(),
-            'status' => $dto->getStatus(),
-            'content' => $dto->getContent()
-        ]);
-
-        return $this->repository->update(id: $id,
-            data: $data->merge(items: $userId)->toArray()
+        return $this->repository->updateGenre(
+            id: $id, data: $dto->toArray(
+                with: ['user_id' => $genre['user']['id']]
+            )
         );
     }
 }

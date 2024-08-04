@@ -2,16 +2,16 @@
 
 namespace App\Domain\Genre\Handlers;
 
-use App\Domain\Genre\Repositories\GenreRepositoryInterface;
+use App\Infrastructure\Repositories\RepositoryInterface;
 
-final class DeleteGenreHandler
+final readonly class DeleteGenreHandler
 {
     public function __construct(
-        private GenreRepositoryInterface $repository
+        private RepositoryInterface $repository
     ) {}
 
     public function handle(string $id): bool
     {
-        return $this->repository->delete(id: $id);
+        return $this->repository->deleteGenre(id: $id);
     }
 }

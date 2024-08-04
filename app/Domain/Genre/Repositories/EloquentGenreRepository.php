@@ -17,11 +17,11 @@ final class EloquentGenreRepository extends BuilderRepository
             builder: $this->genre->query()
         )->all(
             with: ['user'],
-            data: null
+            fields: null
         );
     }
 
-    public function findGenre(string $id): object
+    public function findGenre(string $id): array
     {
         return $this->eloquent(
             builder: $this->genre->query()
@@ -33,9 +33,29 @@ final class EloquentGenreRepository extends BuilderRepository
 
     public function createGenre(array $data): bool
     {
-        return $this->create(
-            data: $data,
-            override: null
+        return $this->eloquent(
+            builder: $this->genre->query()
+        )->create(
+            data: $data
+        );
+    }
+
+    public function updateGenre(string $id, array $data): bool
+    {
+        return $this->eloquent(
+            builder: $this->genre->query()
+        )->update(
+            id: $id,
+            data: $data
+        );
+    }
+
+    public function deleteGenre(string $id): bool
+    {
+        return $this->eloquent(
+            builder: $this->genre->query()
+        )->delete(
+            id: $id
         );
     }
 }

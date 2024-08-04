@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Domain\Genre\Architecture\Web\Store;
+namespace App\Domain\Genre\Directories\Web\Store;
 
 use App\Infrastructure\Controllers\Controller;
 use App\Domain\Genre\Handlers\CreateGenreHandler;
@@ -14,7 +14,7 @@ final class StoreGenreAction extends Controller
         private readonly StoreGenreResponder $responder
     ) {}
 
-    #[Post('/genres/store', name: "genres.store")]
+    #[Post(uri: '/genres/store', name: 'genres.store')]
     public function __invoke(
         GenreRequest $request, CreateGenreHandler $handler
     ): RedirectResponse
