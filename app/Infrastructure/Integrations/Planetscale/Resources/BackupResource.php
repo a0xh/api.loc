@@ -2,8 +2,8 @@
  
 namespace App\Infrastructure\Integrations\Planetscale\Resources;
  
-use App\Infrastructure\Integrations\Planetscale\Entities\CreateBackup;
-use App\Infrastructure\Integrations\Planetscale\PlanetscaleConnector;
+use App\Infrastructure\Integrations\Planetscale\Entities\BackupEntity;
+use App\Infrastructure\Integrations\Planetscale\Connectors\PlanetscaleConnector;
 use Saloon\Enums\Method;
  
 final readonly class BackupResource
@@ -12,7 +12,7 @@ final readonly class BackupResource
         private PlanetscaleConnector $connector,
     ) {}
 
-    public function create(CreateBackup $entity): array
+    public function create(BackupEntity $entity): array
     {
         try {
             $response = $this->connector->send(

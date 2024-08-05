@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Integrations\Planetscale\Resources;
 
-use App\Infrastructure\Integrations\Planetscale\PlanetscaleConnector;
+use App\Infrastructure\Integrations\Planetscale\Connectors\PlanetscaleConnector;
 use Illuminate\Support\Collection;
 use Saloon\Enums\Method;
 

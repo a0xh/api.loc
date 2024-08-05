@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
  
-namespace App\Infrastructure\Integrations\Planetscale;
+namespace App\Infrastructure\Integrations\Planetscale\Connectors;
 
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Contracts\Foundation\Application;
@@ -11,8 +11,10 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
 use Saloon\Enums\Method;
 
-final readonly class Planetscale
+final readonly class PlanetscaleConnector
 {
+    private const TTL = 15;
+
     private $request;
 
     public function __construct(PendingRequest $request)
@@ -41,19 +43,22 @@ final readonly class Planetscale
  
     public static function register(Application $app): void
     {
-        $url = config(key: 'services.planetscale.url');
         $token = config(key: 'services.planetscale.token');
         $id = config(key: 'services.planetscale.id');
 
         $app->bind(
             abstract: PlanetscaleConnector::class,
             concrete: fn () => new PlanetscaleConnector(
-                request: Http::baseUrl(url: $url)->timeout(
-                    seconds: 15
-                )->withHeaders(headers: [
-                    'Authorization' => $id . ':' . $token
-                ]
-            )->asJson()->acceptJson())
+                request: Http::baseUrl(
+                    url: config(key: 'services.planetscale.url')
+                )->timeout(
+                    seconds: self::TTL
+                )->withHeaders(
+                    headers: [
+                        'Authorization' => $id . ':' . $token
+                    ]
+                )->asJson()->acceptJson()
+            )
         );
     }
 }

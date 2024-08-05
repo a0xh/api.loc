@@ -6,11 +6,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 
-abstract class BuilderRepository implements RepositoryInterface
+abstract class BuilderRepository extends DecoratorRepository
 {
     public function __construct(private Builder $query) {}
 
-    public function eloquent(Builder $builder): self
+    public function eloquent(Builder $builder): DecoratorRepository
     {
         $this->query = $builder;
 
