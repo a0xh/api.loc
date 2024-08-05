@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'planetscale' => [
+        'id' => env('PLANETSCALE_SERVICE_ID'),
+        'token' => env('PLANETSCALE_SERVICE_TOKEN'),
+        'url' => env('PLANETSCALE_URL'),
+    ],
+
 ];

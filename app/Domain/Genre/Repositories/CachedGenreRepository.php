@@ -17,13 +17,13 @@ final class CachedGenreRepository extends BuilderRepository
     public function allGenre(): array
     {
         return $this->cache->remember(
-            key: str()->of(string: 'genre_all'),
+            key: 'genre_all',
             ttl: self::TTL,
             callback: fn () => $this->eloquent->allGenre()
         );
     }
 
-    public function findGenre(string $id): object
+    public function findGenre(string $id): array
     {
         return $this->eloquent->findGenre(
             id: $id
@@ -32,9 +32,7 @@ final class CachedGenreRepository extends BuilderRepository
 
     public function createGenre(array $data): bool
     {
-        $this->cache->pull(
-            key: str()->of(string: 'genre_all')
-        );
+        $this->cache->pull(key: 'genre_all');
 
         return $this->eloquent->createGenre(
             data: $data
@@ -43,9 +41,7 @@ final class CachedGenreRepository extends BuilderRepository
 
     public function updateGenre(string $id, array $data): bool
     {
-        $this->cache->pull(
-            key: str()->of(string: 'genre_all')
-        );
+        $this->cache->pull(key: 'genre_all');
 
         return $this->eloquent->updateGenre(
             id: $id,
@@ -55,9 +51,7 @@ final class CachedGenreRepository extends BuilderRepository
 
     public function deleteGenre(string $id): bool
     {
-        $this->cache->forget(
-            key: str()->of(string: 'genre_all')
-        );
+        $this->cache->forget(key: 'genre_all');
 
         return $this->eloquent->deleteGenre(
             id: $id
