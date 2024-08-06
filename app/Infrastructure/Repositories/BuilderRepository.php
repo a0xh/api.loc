@@ -10,7 +10,7 @@ abstract class BuilderRepository extends DecoratorRepository
 {
     public function __construct(private Builder $query) {}
 
-    public function eloquent(Builder $builder): DecoratorRepository
+    public function eloquent(Builder $builder): self
     {
         $this->query = $builder;
 

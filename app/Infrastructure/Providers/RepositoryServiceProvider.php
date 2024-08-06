@@ -15,7 +15,7 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             \App\Infrastructure\Repositories\RepositoryInterface::class,
-            \App\Domain\Genre\Repositories\CachedGenreRepository::class
+            \App\Domain\Genre\Repositories\CachedRepository::class
         );
     }
 

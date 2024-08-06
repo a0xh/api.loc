@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 abstract class DecoratorRepository implements RepositoryInterface
 {
-	protected $repository;
+	private $repository;
 
 	protected function __construct(RepositoryInterface $repository)
 	{

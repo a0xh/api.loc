@@ -14,13 +14,13 @@ return [
      */
     'directories' => [
         /* Genres Routes */
-        app_path('Domain/Genre/Directories/Web/Create') => ['middleware' => ['web', 'auth']],
-        app_path('Domain/Genre/Directories/Web/Delete') => ['middleware' => ['web', 'auth']],
-        app_path('Domain/Genre/Directories/Web/Edit') => ['middleware' => ['web', 'auth']],
-        app_path('Domain/Genre/Directories/Web/Index') => ['middleware' => ['web', 'auth']],
-        app_path('Domain/Genre/Directories/Web/Show') => ['middleware' => ['web', 'auth']],
-        app_path('Domain/Genre/Directories/Web/Store') => ['middleware' => ['web', 'auth']],
-        app_path('Domain/Genre/Directories/Web/Update') => ['middleware' => ['web', 'auth']],
+        app_path('Domain/Genre/Presentations/Web/Create') => ['middleware' => ['web', 'auth']],
+        app_path('Domain/Genre/Presentations/Web/Delete') => ['middleware' => ['web', 'auth']],
+        app_path('Domain/Genre/Presentations/Web/Edit') => ['middleware' => ['web', 'auth']],
+        app_path('Domain/Genre/Presentations/Web/Index') => ['middleware' => ['web', 'auth']],
+        app_path('Domain/Genre/Presentations/Web/Show') => ['middleware' => ['web', 'auth']],
+        app_path('Domain/Genre/Presentations/Web/Store') => ['middleware' => ['web', 'auth']],
+        app_path('Domain/Genre/Presentations/Web/Update') => ['middleware' => ['web', 'auth']],
         /*
         app_path('Http/Controllers/Api') => [
            'prefix' => 'api',
