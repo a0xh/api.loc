@@ -1,3 +1,4 @@
+```
 Route: api.genres.create  |   Method: GET /api/{user:id}/genres/create
 Route: api.genres.delete  |   Method: DELETE /api/{user:id}/genres/{genre:id}/delete
 Route: api.genres.edit    |   Method: GET /api/{user:id}/genres/{genre:id}/edit
@@ -21,3 +22,4 @@ Route: api.films.index   |   Method: GET /api/{user:id}/films
 Route: api.films.show    |   Method: GET /api/{user:id}/films/{genre:id}/show
 Route: api.films.store   |   Method: POST /api/{user:id}/films/store
 Route: api.films.update  |   Method: PUT|PATCH /api/{user:id}/films/{genre:id}/update
+```
