@@ -22,8 +22,4 @@ Route: api.films.index   |   Method: GET /api/{user:id}/films
 Route: api.films.show    |   Method: GET /api/{user:id}/films/{genre:id}/show
 Route: api.films.store   |   Method: POST /api/{user:id}/films/store
 Route: api.films.update  |   Method: PUT|PATCH /api/{user:id}/films/{genre:id}/update
-<<<<<<< HEAD
 ```
-=======
-```
->>>>>>> 592ca78bede6e5ed2a5c4e11fb573e98130d58e2
