@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\{Model, SoftDeletes};
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Laravel\Scout\Searchable;
 
 class Genre extends Model
 {
-    use HasUuids, HasFactory, Sluggable, SoftDeletes;
+    use HasUuids, HasFactory, Sluggable, SoftDeletes, Searchable;
 
     protected $table = 'genres';
     protected $keyType = 'uuid';
@@ -76,6 +77,23 @@ class Genre extends Model
             'slug' => [
                 'source' => 'title'
             ]
+        ];
+    }
+
+    public function searchableAs(): string
+    {
+        return 'genres_index';
+    }
+
+    public function toSearchableArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'slug' => $this->slug,
+            'description' => $this->description,
+            'keywords' => $this->keywords,
+            'content' => $this->content
         ];
     }
 

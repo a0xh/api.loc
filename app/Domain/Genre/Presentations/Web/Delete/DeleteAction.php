@@ -11,15 +11,15 @@ use Illuminate\Http\RedirectResponse;
 final class DeleteAction extends Controller
 {
     public function __construct(
-        private readonly DeleteResponder $responder
+        private readonly DeleteResponder $responder,
+        private readonly DeleteHandler $handler
     ) {}
 
     #[Delete(uri: '/genres/{id}/delete', name: 'genres.delete')]
-    public function __invoke(
-        string $id, DeleteHandler $handler): RedirectResponse
+    public function __invoke(string $id): RedirectResponse
     {
         return $this->responder->redirect(
-            result: $handler->handle(
+            result: $this->handler->delete(
                 id: $id
             )
         );

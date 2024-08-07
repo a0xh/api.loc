@@ -21,6 +21,9 @@ return [
         app_path('Domain/Genre/Presentations/Web/Show') => ['middleware' => ['web', 'auth']],
         app_path('Domain/Genre/Presentations/Web/Store') => ['middleware' => ['web', 'auth']],
         app_path('Domain/Genre/Presentations/Web/Update') => ['middleware' => ['web', 'auth']],
+
+
+        app_path('Domain/Genre/Presentations/Api/Index') => ['middleware' => ['web', 'auth']],
         /*
         app_path('Http/Controllers/Api') => [
            'prefix' => 'api',

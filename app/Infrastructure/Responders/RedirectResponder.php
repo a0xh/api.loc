@@ -3,7 +3,6 @@
 namespace App\Infrastructure\Responders;
 
 use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 
 abstract readonly class RedirectResponder
 {

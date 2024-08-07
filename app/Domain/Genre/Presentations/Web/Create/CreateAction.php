@@ -14,6 +14,6 @@ final class CreateAction extends Controller
     #[Get(uri: '/genres/create', name: 'genres.create')]
     public function __invoke(): \Illuminate\View\View
     {
-        return $this->responder->render();
+        return $this->responder->render([]);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Domain\Genre\Repositories;
 
 use App\Infrastructure\Repositories\BuilderRepository;
 use App\Application\Models\Genre;
+use Illuminate\Database\Eloquent\Builder;
 
 final class EloquentRepository extends BuilderRepository
 {

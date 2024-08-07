@@ -1,0 +1,26 @@
+<?php declare(strict_types=1);
+
+namespace App\Domain\Genre\Presentations\Api\Index;
+
+use App\Infrastructure\Controllers\Controller;
+use App\Infrastructure\Repositories\RepositoryInterface;
+use App\Domain\Genre\Responses\CollectionResponse;
+use Spatie\RouteAttributes\Attributes\Get;
+
+final class IndexAction extends Controller
+{
+    public function __construct(
+        private readonly RepositoryInterface $repository,
+        private readonly IndexResponder $responder
+    ) {}
+
+    #[Get(uri: '/api/genres', name: 'api.genres.index')]
+    public function __invoke(): CollectionResponse
+    {
+        return $this->responder->json(
+            data: [
+                'genres' => $this->repository->allGenre()
+            ]
+        );
+    }
+}

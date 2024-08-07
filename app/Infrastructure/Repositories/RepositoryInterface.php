@@ -2,6 +2,8 @@
 
 namespace App\Infrastructure\Repositories;
 
+use Illuminate\Database\Eloquent\Builder;
+
 interface RepositoryInterface
 {
     public function all(?array $with, ?array $fields): array;

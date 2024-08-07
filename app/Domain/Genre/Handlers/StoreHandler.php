@@ -13,7 +13,7 @@ final readonly class StoreHandler
         private AuthManager $auth
     ) {}
     
-    public function handle(StoreDto $dto): bool
+    public function create(StoreDto $dto): bool
     {
         return $this->repository->createGenre(
             data: $dto->toArray(

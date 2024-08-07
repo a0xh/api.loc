@@ -11,12 +11,13 @@ final readonly class UpdateHandler
         private RepositoryInterface $repository
     ) {}
 
-    public function handle(string $id, UpdateDto $dto): bool
+    public function update(string $id, UpdateDto $dto): bool
     {
         $genre = $this->repository->findGenre(id: $id);
 
         return $this->repository->updateGenre(
-            id: $id, data: $dto->toArray(
+            id: $id,
+            data: $dto->toArray(
                 with: ['user_id' => $genre['user']['id']]
             )
         );

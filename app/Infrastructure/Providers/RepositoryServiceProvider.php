@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Infrastructure\Providers;
 
@@ -15,7 +15,7 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             \App\Infrastructure\Repositories\RepositoryInterface::class,
-            \App\Domain\Genre\Repositories\CachedRepository::class
+            \App\Domain\Genre\Repositories\EloquentRepository::class
         );
     }
 

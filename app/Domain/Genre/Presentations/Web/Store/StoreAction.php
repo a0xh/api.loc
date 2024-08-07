@@ -11,16 +11,17 @@ use Illuminate\Http\RedirectResponse;
 final class StoreAction extends Controller
 {
     public function __construct(
-        private readonly StoreResponder $responder
+        private readonly StoreResponder $responder,
+        private readonly StoreHandler $handler
     ) {}
 
     #[Post(uri: '/genres/store', name: 'genres.store')]
-    public function __invoke(
-        StoreRequest $request, StoreHandler $handler
-    ): RedirectResponse
+    public function __invoke(StoreRequest $request): RedirectResponse
     {
         return $this->responder->redirect(
-            result: $handler->handle(dto: $request->toDto())
+            result: $this->handler->create(
+                dto: $request->toDto()
+            )
         );
     }
 }

@@ -12,17 +12,18 @@ use Illuminate\Http\RedirectResponse;
 final class UpdateAction extends Controller
 {
     public function __construct(
-        private readonly UpdateResponder $responder
+        private readonly UpdateResponder $responder,
+        private readonly UpdateHandler $handler
     ) {}
 
     #[Put(uri: '/genres/{id}/update', name: 'genres.update')]
-    public function __invoke(
-        string $id, UpdateRequest $request, UpdateHandler $handler
-    ): RedirectResponse
+    public function __invoke(string $id, UpdateRequest $request): RedirectResponse
     {
-        return $this->responder->redirect(result: $handler->handle(
-            id: $id,
-            dto: $request->toDto()
-        ));
+        return $this->responder->redirect(
+            result: $this->handler->update(
+                id: $id,
+                dto: $request->toDto()
+            )
+        );
     }
 }

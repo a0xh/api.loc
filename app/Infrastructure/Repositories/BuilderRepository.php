@@ -8,7 +8,9 @@ use Illuminate\Support\Collection;
 
 abstract class BuilderRepository extends DecoratorRepository
 {
-    public function __construct(private Builder $query) {}
+    public function __construct(
+        private Builder $query
+    ) {}
 
     public function eloquent(Builder $builder): self
     {

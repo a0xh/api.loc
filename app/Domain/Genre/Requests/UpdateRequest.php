@@ -26,7 +26,7 @@ class UpdateRequest extends FormRequest
             'title' => ['bail', 'required', 'string', 'min:3', 'max:73'],
             'description' => ['bail', 'nullable', 'string', 'min:3', 'max:200'],
             'keywords' => ['bail', 'nullable', 'string', 'min:3', 'max:200'],
-            'slug' => ['bail', 'nullable', 'string', 'lowercase', 'min:1', 'max:78', 'unique:genres,slug,' . $this->id]
+            'slug' => ['bail', 'nullable', 'string', 'lowercase', 'min:1', 'max:78', 'unique:genres,slug,' . $this->id],
             'content' => ['bail', 'nullable', 'string', 'max:65535'],
             'status' => ['bail', 'required', 'string', 'in:active,inactive'],
         ];
