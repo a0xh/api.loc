@@ -4,7 +4,6 @@ namespace App\Infrastructure\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
-use Illuminate\Database\Eloquent\Model;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -14,8 +13,8 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(
-            \App\Infrastructure\Repositories\RepositoryInterface::class,
-            \App\Domain\Genre\Repositories\EloquentRepository::class
+            abstract: \App\Infrastructure\Repositories\RepositoryInterface::class,
+            concrete: \App\Domain\Genre\Repositories\EloquentRepository::class
         );
     }
 
@@ -24,8 +23,11 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::addNamespace('admin', [
-            app_path() . '/Infrastructure/Views'
-        ]);
+        View::addNamespace(
+            namespace: 'admin',
+            hints: [
+                app_path() . '/Infrastructure/Views'
+            ]
+        );
     }
 }

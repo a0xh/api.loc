@@ -17,21 +17,26 @@ return new class extends Migration
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_general_ci';
 
-            $table->comment('Пользователи');
+            $table->comment(comment: 'Пользователи');
 
-            $table->uuid('id')->primary();
-            $table->string('login')->unique();
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->enum('status', ['active', 'inactive'])
-                ->default('inactive');
-            $table->boolean('is_deleted')->default(false);
+            $table->uuid(column: 'id')->primary();
+            $table->string(column: 'login', length: 44)->unique();
+            $table->string(column: 'email')->unique();
+            $table->timestamp(
+                column: 'email_verified_at', precision: 0
+            )->nullable();
+            $table->string(column: 'password');
+            $table->enum(
+                column: 'status', allowed: ['active', 'inactive']
+            )->default(mixed: 'inactive');
+            $table->boolean(column: 'is_deleted')->default(mixed: false);
             $table->rememberToken();
             $table->timestamps(precision: 0);
             $table->softDeletes();
 
-            $table->index('created_at');
+            $table->index(
+                columns: 'created_at', name: null, algorithm: null
+            );
             $table->engine = 'InnoDB';
         });
 

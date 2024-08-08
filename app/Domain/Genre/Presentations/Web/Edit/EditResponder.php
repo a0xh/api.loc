@@ -3,15 +3,15 @@
 namespace App\Domain\Genre\Presentations\Web\Edit;
 
 use App\Infrastructure\Responders\ViewResponder;
-use Illuminate\Support\Facades\View;
 
-final readonly class EditResponder extends ViewResponder
+final readonly class EditResponder
 {
-    public function render(?array $data): \Illuminate\View\View
+    public function respond(string $view, ?array $data, ?array $mergeData): ViewResponder
     {
-        return View::make(
-            view: 'admin::genres.edit',
-            data: $data
+        return new ViewResponder(
+            view: $view ?? 'layouts.default',
+            data: $data ?? [],
+            mergeData: $dataMerge ?? []
         );
     }
 }

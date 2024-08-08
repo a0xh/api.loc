@@ -6,7 +6,7 @@ use App\Infrastructure\Controllers\Controller;
 use Spatie\RouteAttributes\Attributes\Post;
 use App\Domain\Genre\Requests\StoreRequest;
 use App\Domain\Genre\Handlers\StoreHandler;
-use Illuminate\Http\RedirectResponse;
+use App\Infrastructure\Responders\RedirectResponder;
 
 final class StoreAction extends Controller
 {
@@ -16,10 +16,10 @@ final class StoreAction extends Controller
     ) {}
 
     #[Post(uri: '/genres/store', name: 'genres.store')]
-    public function __invoke(StoreRequest $request): RedirectResponse
+    public function __invoke(StoreRequest $request): RedirectResponder
     {
-        return $this->responder->redirect(
-            result: $this->handler->create(
+        return $this->responder->respond(
+            result: $this->handler->handle(
                 dto: $request->toDto()
             )
         );

@@ -11,7 +11,7 @@ final readonly class UpdateHandler
         private RepositoryInterface $repository
     ) {}
 
-    public function update(string $id, UpdateDto $dto): bool
+    public function handle(string $id, UpdateDto $dto): bool
     {
         $genre = $this->repository->findGenre(id: $id);
 

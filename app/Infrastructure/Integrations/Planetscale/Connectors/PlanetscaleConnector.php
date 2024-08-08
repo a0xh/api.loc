@@ -43,19 +43,26 @@ final readonly class PlanetscaleConnector
  
     public static function register(Application $app): void
     {
-        $token = config(key: 'services.planetscale.token');
-        $id = config(key: 'services.planetscale.id');
-
         $app->bind(
             abstract: PlanetscaleConnector::class,
             concrete: fn () => new PlanetscaleConnector(
                 request: Http::baseUrl(
-                    url: config(key: 'services.planetscale.url')
+                    url: config(
+                        key: 'services.planetscale.url'
+                    )
                 )->timeout(
                     seconds: self::TTL
                 )->withHeaders(
                     headers: [
-                        'Authorization' => $id . ':' . $token
+                        'Authorization' => $token str()->of(
+                            string: config(
+                                key: 'services.planetscale.id'
+                            )
+                        )->append(values: ' : ')->finish(
+                            cap: config(
+                                key: 'services.planetscale.token'
+                            )
+                        )->__toString()
                     ]
                 )->asJson()->acceptJson()
             )

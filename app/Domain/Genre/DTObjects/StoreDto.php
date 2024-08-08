@@ -45,17 +45,13 @@ final class StoreDto
 
     public function toArray(?array $with): array
     {
-        $data = [
+        return collect(value: [
             'title' => $this->getTitle(),
             'description' => $this->getDescription(),
             'content' => $this->getContent(),
             'slug' => $this->getSlug(),
             'keywords' => $this->getKeywords(),
             'status' => $this->getStatus()
-        ];
-
-        return collect(value: $data)->merge(
-            items: $with
-        )->toArray();
+        ])->merge(items: $with)->toArray();
     }
 }

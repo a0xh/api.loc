@@ -4,6 +4,7 @@ namespace App\Domain\Genre\Presentations\Web\Create;
 
 use App\Infrastructure\Controllers\Controller;
 use Spatie\RouteAttributes\Attributes\Get;
+use App\Infrastructure\Responders\ViewResponder;
 
 final class CreateAction extends Controller
 {
@@ -12,8 +13,12 @@ final class CreateAction extends Controller
     ) {}
 
     #[Get(uri: '/genres/create', name: 'genres.create')]
-    public function __invoke(): \Illuminate\View\View
+    public function __invoke(): ViewResponder
     {
-        return $this->responder->render([]);
+        return $this->responder->respond(
+            view: 'genres.create',
+            data: null,
+            mergeData: null
+        );
     }
 }

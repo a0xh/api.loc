@@ -4,6 +4,7 @@ namespace App\Infrastructure\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\{Gate, Auth};
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,6 +21,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $user = Auth::user()->roles->first()->name;
+
+        Gate::define('delete', function() use($user) {
+            return $user === 'admin';
+        });
+
         Model::unguard();
         Model::shouldBeStrict();
     }

@@ -3,15 +3,15 @@
 namespace App\Domain\Genre\Presentations\Web\Create;
 
 use App\Infrastructure\Responders\ViewResponder;
-use Illuminate\Support\Facades\View;
 
-final readonly class CreateResponder extends ViewResponder
+final readonly class CreateResponder
 {
-    public function render(?array $data): \Illuminate\View\View
+    public function respond(string $view, ?array $data, ?array $mergeData): ViewResponder
     {
-        return View::make(
-            view: 'admin::genres.create',
-            data: $data
+        return new ViewResponder(
+            view: $view ?? 'layouts.default',
+            data: $data ?? [],
+            mergeData: $dataMerge ?? []
         );
     }
 }

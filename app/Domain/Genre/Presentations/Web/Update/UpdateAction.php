@@ -6,7 +6,7 @@ use App\Infrastructure\Controllers\Controller;
 use Spatie\RouteAttributes\Attributes\{Put, WhereUuid};
 use App\Domain\Genre\Handlers\UpdateHandler;
 use App\Domain\Genre\Requests\UpdateRequest;
-use Illuminate\Http\RedirectResponse;
+use App\Infrastructure\Responders\RedirectResponder;
 
 #[WhereUuid(param: 'id')]
 final class UpdateAction extends Controller
@@ -17,10 +17,10 @@ final class UpdateAction extends Controller
     ) {}
 
     #[Put(uri: '/genres/{id}/update', name: 'genres.update')]
-    public function __invoke(string $id, UpdateRequest $request): RedirectResponse
+    public function __invoke(string $id, UpdateRequest $request): RedirectResponder
     {
-        return $this->responder->redirect(
-            result: $this->handler->update(
+        return $this->responder->respond(
+            result: $this->handler->handle(
                 id: $id,
                 dto: $request->toDto()
             )

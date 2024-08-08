@@ -2,16 +2,15 @@
 
 namespace App\Domain\Genre\Presentations\Api\Index;
 
-use App\Domain\Genre\Resources\IndexResource;
-use App\Domain\Genre\Responses\CollectionResponse;
+use App\Domain\Genre\Resources\AllResource;
 use App\Infrastructure\Responders\JsonResponder;
 
-final class IndexResponder extends JsonResponder
+final readonly class IndexResponder
 {
-    public function json(?array $data): CollectionResponse
+    public function respond(array $data): JsonResponder
     {
-        return new CollectionResponse(
-            data: IndexResource::collection(
+        return new JsonResponder(
+            data: AllResource::collection(
                 resource: $data
             )
         );

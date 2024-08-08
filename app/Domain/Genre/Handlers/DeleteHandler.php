@@ -11,7 +11,7 @@ final readonly class DeleteHandler
         private RepositoryInterface $repository
     ) {}
 
-    public function delete(string $id): bool
+    public function handle(string $id): bool
     {
         return $this->repository->deleteGenre(
             id: $id

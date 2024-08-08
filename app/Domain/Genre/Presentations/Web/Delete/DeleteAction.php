@@ -5,7 +5,7 @@ namespace App\Domain\Genre\Presentations\Web\Delete;
 use App\Infrastructure\Controllers\Controller;
 use Spatie\RouteAttributes\Attributes\{Delete, WhereUuid};
 use App\Domain\Genre\Handlers\DeleteHandler;
-use Illuminate\Http\RedirectResponse;
+use App\Infrastructure\Responders\RedirectResponder;
 
 #[WhereUuid(param: 'id')]
 final class DeleteAction extends Controller
@@ -16,12 +16,10 @@ final class DeleteAction extends Controller
     ) {}
 
     #[Delete(uri: '/genres/{id}/delete', name: 'genres.delete')]
-    public function __invoke(string $id): RedirectResponse
+    public function __invoke(string $id): RedirectResponder
     {
-        return $this->responder->redirect(
-            result: $this->handler->delete(
-                id: $id
-            )
+        return $this->responder->respond(
+            result: $this->handler->handle(id: $id)
         );
     }
 }

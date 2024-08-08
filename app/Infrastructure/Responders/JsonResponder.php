@@ -2,9 +2,22 @@
 
 namespace App\Infrastructure\Responders;
 
-use App\Domain\Genre\Responses\CollectionResponse;;
+use Illuminate\Contracts\Support\Responsable;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\{JsonResponse, Response};
 
-abstract class JsonResponder
+final readonly class JsonResponder implements Responsable
 {
-	abstract protected function json(array $data): CollectionResponse;
+    public function __construct(
+        private AnonymousResourceCollection $data,
+        private int $status = Response::HTTP_OK
+    ) {}
+
+    public function toResponse($request): JsonResponse
+    {
+        return new JsonResponse(
+            data: $this->data,
+            status: $this->status
+        );
+    }
 }

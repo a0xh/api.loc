@@ -5,7 +5,7 @@ namespace App\Domain\Genre\Resources;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Http\Request;
 
-final class IndexResource extends ResourceCollection
+final class AllResource extends ResourceCollection
 {
     public $preserveKeys = true;
 

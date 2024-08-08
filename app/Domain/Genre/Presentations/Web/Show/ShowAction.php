@@ -5,6 +5,7 @@ namespace App\Domain\Genre\Presentations\Web\Show;
 use App\Infrastructure\Controllers\Controller;
 use App\Infrastructure\Repositories\RepositoryInterface;
 use Spatie\RouteAttributes\Attributes\{Get, WhereUuid};
+use App\Infrastructure\Responders\ViewResponder;
 
 #[WhereUuid(param: 'id')]
 final class ShowAction extends Controller
@@ -15,14 +16,16 @@ final class ShowAction extends Controller
     ) {}
 
     #[Get(uri: '/genres/{id}/show', name: 'genres.show')]
-    public function __invoke(string $id): \Illuminate\View\View
+    public function __invoke(string $id): ViewResponder
     {
-        return $this->responder->render(
+        return $this->responder->handle(
+            view: 'genres.edit',
             data: [
                 'genre' => $this->repository->findGenre(
                     id: $id
                 )
-            ]
+            ],
+            mergeData: null
         );
     }
 }

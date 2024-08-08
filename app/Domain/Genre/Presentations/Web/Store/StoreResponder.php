@@ -3,24 +3,15 @@
 namespace App\Domain\Genre\Presentations\Web\Store;
 
 use App\Infrastructure\Responders\RedirectResponder;
-use Illuminate\Http\RedirectResponse;
 
-final readonly class StoreResponder extends RedirectResponder
+final readonly class StoreResponder
 {
-    public function redirect(bool $result): RedirectResponse
+    public function respond(bool $result): RedirectResponder
     {
-        $message = 'messages.admin.genre.store';
-        
-        if ($result) {
-            session()->flash(
-                key: 'success', value: "{$message}.success"
-            );
-
-            return redirect(to: '/genres', status: 302, headers: []);
-        }
-
-        return back()->with(
-            key: 'warning', value: "{$message}.warning"
+        return new RedirectResponder(
+            url: '/genres',
+            message: 'messages.admin.genre.store',
+            result: $result
         );
     }
 }

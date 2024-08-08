@@ -17,8 +17,12 @@ return new class extends Migration
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_general_ci';
 
-            $table->foreignUuid('role_id')->constrained()->onDelete('cascade');
-            $table->foreignUuid('user_id')->constrained()->onDelete('cascade');
+            $table->foreignUuid(
+                column: 'role_id'
+            )->constrained()->cascadeOnDelete();
+            $table->foreignUuid(
+                column: 'user_id'
+            )->constrained()->cascadeOnDelete();
             
             $table->engine = 'InnoDB';
         });

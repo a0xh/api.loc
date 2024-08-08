@@ -4,7 +4,7 @@ namespace App\Domain\Genre\Presentations\Api\Index;
 
 use App\Infrastructure\Controllers\Controller;
 use App\Infrastructure\Repositories\RepositoryInterface;
-use App\Domain\Genre\Responses\CollectionResponse;
+use App\Infrastructure\Responders\JsonResponder;
 use Spatie\RouteAttributes\Attributes\Get;
 
 final class IndexAction extends Controller
@@ -15,9 +15,9 @@ final class IndexAction extends Controller
     ) {}
 
     #[Get(uri: '/api/genres', name: 'api.genres.index')]
-    public function __invoke(): CollectionResponse
+    public function __invoke(): JsonResponder
     {
-        return $this->responder->json(
+        return $this->responder->respond(
             data: [
                 'genres' => $this->repository->allGenre()
             ]
